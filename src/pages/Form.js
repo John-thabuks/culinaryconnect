@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import '../../src/index.css'; // Import your CSS file
+import { useNavigate } from "react-router-dom";
 
 
 function Form() {
@@ -11,14 +12,15 @@ function Form() {
     const [selectedImage, setSelectedImage] = useState(null);
     const [instructions, setInstruction] = useState("");
     const [ingredients, setIngredients] = useState("");
+    const navigate = useNavigate()
 
-    const resetForm = () => {
-        setName("");
-        setTitle("");
-        setSelectedImage(null);
-        setInstruction("");
-        setIngredients("");
-    };
+    // const resetForm = () => {
+    //     setName("");
+    //     setTitle("");
+    //     setSelectedImage(null);
+    //     setInstruction("");
+    //     setIngredients("");
+    // };
 
     function handleSubmit(e) {
         e.preventDefault();
@@ -55,10 +57,13 @@ function Form() {
                     body: JSON.stringify(newFormData)
                 })
                     .then((response) => response.json())
-                    .then((data) => console.log(data));
+                    .then((data) => {
+                        console.log(data)
+                        navigate(0)
+                    });
 
                 // Clear the form after successful submission
-                resetForm();
+                // resetForm();
             })
             .catch(error => console.error('Error uploading image to Cloudinary:', error));
     }
