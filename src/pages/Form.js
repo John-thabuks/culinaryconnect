@@ -59,7 +59,7 @@ function Form() {
                     .then((response) => response.json())
                     .then((data) => {
                         console.log(data)
-                        navigate(0)
+                        navigate('/')
                     });
 
                 // Clear the form after successful submission
